@@ -14,23 +14,33 @@ class numberTriva extends commando.Command{
 
         });
     }
+//how to do call backs :)
+        async run(message,args){
+            getnumbertrivia(args,(a)=>message.channel.send(a));
+            
+        }
+}
 
-    async run(message,args){
-        const input = parseInt(args);
+function getnumbertrivia(number,callback){
+        const input = parseInt(number);
+        var output = " ";
         console.log(typeof input, input);
         if(isNaN(input)){
-            message.channel.send('input must be number')
+            callback('input must be number') ;
             }
 
         else{
-            const URL2 = URL+args + endURL;
+            const URL2 = URL+ number + endURL;
             request(URL2, function(error,response,body){
-            message.channel.send(body);
+            console.log(typeof body);
+            output = body;
+            callback(output);
         });
         }
 
-    }
 }
 module.exports = numberTriva;
+
+
 
 

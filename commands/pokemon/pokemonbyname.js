@@ -25,7 +25,7 @@ class pokegifCommand extends commando.Command {
                     const match = compareString.compareTwoStrings(poke,arraymon);
                     
                     if (match> 0.5) {
-                        console.log(match);
+                        console.log(poke,pokemins[i], match);
                         message.channel.send(' ' , {
                         files: [pokeGif(arraymon, false)] // Or replace with FileOptions object
                         });
@@ -33,7 +33,9 @@ class pokegifCommand extends commando.Command {
                         break;
                     }
                     else {
-                        
+                        message.channel.send('No matches for that pokemon found');
+                        console.log(match);
+                        break;
                     }
                 }
 

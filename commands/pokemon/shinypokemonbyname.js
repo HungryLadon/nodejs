@@ -2,6 +2,12 @@ const commando = require('discord.js-commando');
 const pokeGif = require('pokemon-gif');
 const compareString = require('string-similarity');
 const fs = require('fs');
+/**
+ * This command looks for a pokemons gif(x/y version) and sends it back.
+ * Also has spell check so even if you have a small typo if will retrieve the right file.
+ * 
+ * 
+ */
 
 class shinypokegifCommand extends commando.Command {
     constructor(client) {
@@ -25,7 +31,7 @@ class shinypokegifCommand extends commando.Command {
                     const match = compareString.compareTwoStrings(poke,arraymon);
                     
                     if (match> 0.5) {
-                        console.log(match);
+                        console.log(poke,pokemins[i], match);
                         message.channel.send(' ' , {
                         files: [pokeGif(arraymon, true)] // Or replace with FileOptions object
                         });
@@ -33,7 +39,9 @@ class shinypokegifCommand extends commando.Command {
                         break;
                     }
                     else {
-                        
+                        message.channel.send('No matches for that pokemonfound');
+                        console.log(match);
+                        break;
                     }
                 }
 
